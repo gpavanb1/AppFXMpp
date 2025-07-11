@@ -9,7 +9,7 @@
 #include "splitfxm/bc.h"
 #include "app/model.h"
 
-TEST(TrajectoryEquationTest, MatchesAnalyticalSolution)
+TEST(AppEquationTest, MatchesAnalyticalSolution)
 {
     double g = 9.81;
 
