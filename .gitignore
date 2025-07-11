@@ -2,7 +2,7 @@
 coverage
 bazel-*
 *.bazel.lock
-third-party
+third-party/**
 
 # Coverage related
 coverage_report
