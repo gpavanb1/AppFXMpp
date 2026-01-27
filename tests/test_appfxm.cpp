@@ -15,7 +15,7 @@ TEST(AppEquationTest, MatchesAnalyticalSolution)
 
     // Create the model and domain
     auto model = std::make_shared<AppModel>(g);
-    auto domain = Domain::from_size(60, 1, 1, {"y"}, 0.0, 1.0);
+    auto domain = Domain::from_size_1d(60, 1, 1, {"y"}, 0.0, 1.0);
 
     // Boundary conditions
     BCMap bcs;
@@ -33,11 +33,11 @@ TEST(AppEquationTest, MatchesAnalyticalSolution)
     sim->steady_state(split_locs, 50, 0.0, 0.0, bounds);
 
     // Check against analytical solution: y(x) = (1 - exp(-g x)) / (1 - exp(-g))
-    for (const auto &cell : domain->interior())
+    for (const auto& cell : domain->interior())
     {
-        double x = cell->x();
+        double x = cell->coords()[0];
         double expected = (1.0 - std::exp(-g * x)) / (1.0 - std::exp(-g));
         double numerical = cell->value(0);
-        EXPECT_NEAR(numerical, expected, 1e-3); // Tolerance of 1e-3 is good enough for this FD scheme
+        EXPECT_NEAR(numerical, expected, 1e-3);  // Tolerance of 1e-3 is good enough for this FD scheme
     }
 }
