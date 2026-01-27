@@ -11,17 +11,18 @@
 
 class AppEquation : public Equation
 {
-public:
+   public:
     AppEquation(double g);
+
+    Eigen::VectorXd stiff_residuals(const std::vector<CellPtr>& cell_sub) const override;
+    Eigen::VectorXd non_stiff_residuals(const std::vector<CellPtr>& cell_sub) const override;
 
     Eigen::VectorXd dae_mask(int size) const override;
     Eigen::VectorXd stiff_mask(int size) const override;
     Eigen::VectorXd non_stiff_mask(int size) const override;
 
-private:
+   private:
     double g_;
-    Eigen::VectorXd stiff_residuals(const std::vector<CellPtr> &cell_sub, Schemes scheme, const std::map<std::string, double> &scheme_opts = {}) const;
-    Eigen::VectorXd non_stiff_residuals(const std::vector<CellPtr> &cell_sub, Schemes scheme, const std::map<std::string, double> &scheme_opts = {}) const;
 };
 
-#endif // APP_EQUATION_H
+#endif  // APP_EQUATION_H

@@ -6,9 +6,7 @@
 AppEquation::AppEquation(double g)
     : g_(g) {}
 
-Eigen::VectorXd AppEquation::non_stiff_residuals(const std::vector<CellPtr> &cell_sub,
-                                                 Schemes scheme,
-                                                 const std::map<std::string, double> &scheme_opts) const
+Eigen::VectorXd AppEquation::non_stiff_residuals(const std::vector<CellPtr>& cell_sub) const
 {
     // Get y values at each cell (assumes single DOF per cell)
     std::vector<double> y(cell_sub.size());
@@ -18,8 +16,8 @@ Eigen::VectorXd AppEquation::non_stiff_residuals(const std::vector<CellPtr> &cel
     }
 
     // Compute first and second derivatives
-    double yp = dx(y, cell_sub, scheme);
-    double ypp = d2x(y, cell_sub, scheme);
+    double yp = dx(y, cell_sub, scheme_);
+    double ypp = d2x(y, cell_sub, scheme_);
 
     // Compute residual only at center index
     double res_val = ypp + g_ * yp;
@@ -29,9 +27,7 @@ Eigen::VectorXd AppEquation::non_stiff_residuals(const std::vector<CellPtr> &cel
     return res;
 }
 
-Eigen::VectorXd AppEquation::stiff_residuals(const std::vector<CellPtr> &cell_sub,
-                                             Schemes scheme,
-                                             const std::map<std::string, double> &scheme_opts) const
+Eigen::VectorXd AppEquation::stiff_residuals(const std::vector<CellPtr>& cell_sub) const
 {
     int size = cell_sub[0]->values().size();
     return Eigen::VectorXd::Zero(size);
