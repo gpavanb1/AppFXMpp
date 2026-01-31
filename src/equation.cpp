@@ -1,7 +1,9 @@
 #include "splitfxm/cell.h"
-#include "splitfxm/derivatives.h"
+#include "splitfxm/operators/operators.h"
 #include "splitfxm/schemes.h"
 #include "app/equation.h"
+
+using namespace Operators::FDM;
 
 AppEquation::AppEquation(double g)
     : g_(g) {}
