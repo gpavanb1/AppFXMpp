@@ -4,13 +4,17 @@
 #include "splitfxm/schemes.h"
 #include "splitfxm/simulation.h"
 #include "splitfxm/visualize/visualize.h"
+#include "splitnewton/options.hpp"
 #include <iostream>
 #include <map>
 #include <memory>
 #include <string>
 
-int main()
+int main(int argc, char** argv)
 {
+    // Initialize SplitNewton
+    splitnewton::initialize(argc, argv);
+
     // Create the model (uses TrajectoryEquation with g = 9.81)
     auto model = std::make_shared<AppModel>();
 
@@ -32,7 +36,7 @@ int main()
 
     // Evolve to steady state
     double t_diff = 0.1;
-    std::vector<int> split_locs = {};
+    std::vector<int> split_locs = {1};
     sim->evolve_sim(t_diff, split_locs, "NoSplit", "Euler", 1e-6, 1e-3);
     std::vector<std::vector<double>> bounds = {{-1.0}, {1.0}};
     int num_iter = sim->steady_state(split_locs, 50, 0.0, 0.0, bounds);
