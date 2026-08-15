@@ -1,7 +1,7 @@
 #include "splitfxm/cell.h"
 #include "splitfxm/operators/operators.h"
 #include "splitfxm/schemes.h"
-#include "app/equation.h"
+#include "equation.h"
 
 using namespace Operators::FDM;
 
