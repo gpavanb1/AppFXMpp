@@ -14,12 +14,8 @@ build --copt=-isysroot --copt=/Library/Developer/CommandLineTools/SDKs/MacOSX.sd
 build --linkopt=-isysroot --linkopt=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
 build --linkopt="-Wl,-platform_version,macos,26.0,26.0"
 
-# 3. Bazel 8/9 Compatibility
-# Re-enable WORKSPACE (disabled by default in Bazel 8)
-common --enable_workspace=true
-# Re-enable native rules in global namespace for external dependencies that haven't updated their loads
+# 3. Bazel 8 compatibility for vendored deps that still use legacy BUILD files
 common --incompatible_stop_exporting_language_modules=false
-# Allow empty globs for dependencies with legacy BUILD files
 common --incompatible_disallow_empty_glob=false
 
 # AppFXMpp uses SplitFXM++'s Cantera BVP connector; this is disabled by default.

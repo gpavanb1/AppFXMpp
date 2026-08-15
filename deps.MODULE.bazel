@@ -1,3 +1,6 @@
+local_repository = use_repo_rule("@bazel_tools//tools/build_defs/repo:local.bzl", "local_repository")
+new_local_repository = use_repo_rule("@bazel_tools//tools/build_defs/repo:local.bzl", "new_local_repository")
+
 local_repository(
     name = "splitfxmpp",
     path = "third-party/SplitFXMpp",
