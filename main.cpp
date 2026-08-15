@@ -1,6 +1,7 @@
-#include "app/model.h"
+#include "equation.h"
 #include "splitfxm/bc.h"
 #include "splitfxm/domain.h"
+#include "splitfxm/model.h"
 #include "splitfxm/schemes.h"
 #include "splitfxm/simulation.h"
 #include "splitfxm/visualize/visualize.h"
@@ -15,8 +16,8 @@ int main(int argc, char** argv)
     // Initialize SplitNewton
     splitnewton::initialize(argc, argv);
 
-    // Create the model (uses TrajectoryEquation with g = 9.81)
-    auto model = std::make_shared<AppModel>();
+    // Default path: wrap the equation in the core Model
+    auto model = std::make_shared<Model>(std::make_shared<AppEquation>());
 
     // Create a domain: 80 interior cells, 1 left + 1 right ghost cell, 1 variable
     // "y"

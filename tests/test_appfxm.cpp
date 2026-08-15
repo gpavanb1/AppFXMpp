@@ -7,14 +7,15 @@
 #include "splitfxm/simulation.h"
 #include "splitfxm/schemes.h"
 #include "splitfxm/bc.h"
-#include "app/model.h"
+#include "equation.h"
+#include "splitfxm/model.h"
 
 TEST(AppEquationTest, MatchesAnalyticalSolution)
 {
     double g = 9.81;
 
     // Create the model and domain
-    auto model = std::make_shared<AppModel>(g);
+    auto model = std::make_shared<Model>(std::make_shared<AppEquation>(g));
     auto domain = Domain::from_size_1d(60, 1, 1, {"y"}, 0.0, 1.0);
 
     // Boundary conditions
